@@ -19,14 +19,12 @@ function getOptionsFromCurrentCell(){
     .getValues() // the value for this criteria
     .map(value => value[0]); // flatten in an one dimension array
 
-  const cellData = SpreadsheetApp
+  const selectedOptions = SpreadsheetApp
     .getActiveRange()
     .getCell(1, 1) // first selected cell in the range
-    .getValue();
-
-  const selectedOptions = cellData
-    .split(',')
-    .map(str => str.trim());
+    .getValue()
+    .split(',') // convert the cell string into an array
+    .map(str => str.trim()); // remove unwanted whitespace
   
   const optionsData = validOptions.map(option => {
     return {
