@@ -12,10 +12,21 @@ function showSelectDialog(){
 }
 
 function getOptionsFromCurrentCell(){
-  const validOptions = SpreadsheetApp.getActiveRange().getDataValidation().getCriteriaValues()[0].getValues().map(value => value[0]);
+  const validOptions = SpreadsheetApp
+    .getActiveRange() // everything that is selected
+    .getDataValidation() // all validation rules for that
+    .getCriteriaValues()[0] // the first criteria
+    .getValues() // the value for this criteria
+    .map(value => value[0]); // flatten in an one dimension array
 
-  const cellData = SpreadsheetApp.getActiveRange().getCell(1, 1).getValue();
-  const selectedOptions = cellData.split(',').map(str => str.trim());
+  const cellData = SpreadsheetApp
+    .getActiveRange()
+    .getCell(1, 1) // first selected cell in the range
+    .getValue();
+
+  const selectedOptions = cellData
+    .split(',')
+    .map(str => str.trim());
   
   const optionsData = validOptions.map(option => {
     return {
