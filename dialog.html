@@ -2,32 +2,56 @@
 <html>
   <body>
     <? for (const option of optionsData) { ?>
-      <input type="checkbox" class="option" value="<?= option.value ?>" <?= option.isSelected && "checked" ?>>
+      <input 
+        type="checkbox" 
+        class="option" 
+        value="<?= option.value ?>" 
+        <?= option.isSelected && "checked" ?>
+      >
       <label><?= option.value ?></label><br>
     <? } ?>
     <div style="margin-top:10px;">
-      <input type="button" value="all" onclick="setAll('check')" />
-      <input type="button" value="clear" onclick="setAll('clear')" />
-      <input type="button" value="cancel" onclick="google.script.host.close()" />
-      <input type="button" value="apply" onclick="apply()" />
+      <input 
+        type="button" 
+        value="all" 
+        onclick="setAll('check')"
+      />
+      <input 
+        type="button" 
+        value="clear" 
+        onclick="setAll('clear')" 
+      />
+      <input 
+        type="button"
+        value="cancel"
+        onclick="google.script.host.close()"
+      />
+      <input 
+        type="button"
+        value="apply"
+        onclick="apply()"
+      />
     </div>
     <script>      
       function setAll(value) {
-        const optionsEl = document.querySelectorAll(".option");
+        const optionsEl = document
+          .querySelectorAll(".option");
         for (const checkbox of optionsEl) {
           checkbox.checked = value === 'check';
         }
       }
 
       function apply(){
-        const checkedEls = document.querySelectorAll(".option:checked");
+        const checkedEls = document
+          .querySelectorAll(".option:checked");
         const selectedValues = [];
         for (const checkbox of checkedEls) {
           if (checkbox.checked) {
              selectedValues.push(checkbox.value);
           }
         }
-        google.script.run.setOptionsForCurrentCell(selectedValues);
+        google.script.run
+          .setOptionsForCurrentCell(selectedValues);
         google.script.host.close();
       }
     </script>
