@@ -37,7 +37,12 @@ function getOptionsFromCurrentCell(){
 }
 
 function setOptionsForCurrentCell(selectedOptions){
-  const cellData = (Array.isArray(selectedOptions) && selectedOptions.length > 0) ? selectedOptions.join(',') : '';
+  const hasOptions = Array.isArray(selectedOptions) 
+    && selectedOptions.length > 0
+  const cellData = hasOptions
+    ? selectedOptions.join(',') // creates a comma separated string
+    : '';
   const cell = SpreadsheetApp.getActiveRange().getCell(1, 1);
   cell.setValue(cellData);  
 }
+
